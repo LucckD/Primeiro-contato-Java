@@ -4,9 +4,6 @@ public class Login {
 
     public static void main(String[] args) {
 
-        //Inicializa o menu de opções
-        menu();
-
         /*Próximas att
 
         Verificação para variável vazia
@@ -17,21 +14,19 @@ public class Login {
 
         //Variáveis cadastro
 
-        String nomeCadastro = "HOUSEFLIPERapenasSER8912"; //Fatores didáticos
-        String senhaCadastro;
-        String confirmacaoSenhaCadastro = "FLI891SER8"; //Fatores didáticos
-        String nomeLogin = "OUSEFLIPERapenasSER8912"; //Fatores didáticos
-        String senhaLogin = "penasSER891"; //Fatores didáticos
+        String nomeCadastro = "";
+        String senhaCadastro = "";
         boolean cadastro = false;
 
         //Váriaveis cadastro
 
         Scanner input = new Scanner(System.in);
-        int resposta = input.nextInt();
-        input.nextLine();
 
-
-        while (resposta != 3) {
+        while (true) {
+            //Mover de lugar para que leia somente no while, ao invés do switch
+            menu();
+            int resposta = input.nextInt();
+            input.nextLine();
 
             switch (resposta) {
 
@@ -41,31 +36,30 @@ public class Login {
                         System.out.println("-----------------------------------------------");
                         System.out.println("Você não possui cadastro. Bora criar uma conta!");
                         System.out.println("-----------------------------------------------\n");
-                        menu();
                     } else {
 
-                        while (!nomeLogin.equals(nomeCadastro) && !senhaLogin.equals(confirmacaoSenhaCadastro)) {
+                        System.out.println("Digite seu usuário: ");
+                        String nomeLogin = input.nextLine();
 
-                            //Confirmação usuário
-                            System.out.println("Digite seu usuário: ");
+
+                        //Confirmação usuário
+                        while (!nomeLogin.equals(nomeCadastro)) {
+                            System.out.println("Usuário incorreto. Tente novamente");
                             nomeLogin = input.nextLine();
-                            while (!nomeLogin.equals(nomeCadastro)) {
-                                System.out.println("Usuário incorreto. Tente novamente");
-                                nomeLogin = input.nextLine();
-                            }
-
-                            //Confirmação senha
-                            System.out.println("\nDigite a sua senha: ");
-                            senhaLogin = input.nextLine();
-                            while (!senhaLogin.equals(confirmacaoSenhaCadastro)) {
-                                System.out.println("Senha incorreta. Tente novamente.");
-                                senhaLogin = input.nextLine();
-                            }
-
                         }
 
+                        //Confirmação senha
+                        System.out.println("\nDigite a sua senha: ");
+                        String senhaLogin = input.nextLine();
+
+                        while (!senhaLogin.equals(senhaCadastro)) {
+                            System.out.println("Senha incorreta. Tente novamente.");
+                            senhaLogin = input.nextLine();
+                        }
                         System.out.println("Você está logado.");
                     }
+
+
                     break;
                 case 2:
 
@@ -82,12 +76,12 @@ public class Login {
                         senhaCadastro = input.nextLine();
 
                         System.out.println("Confirme sua senha.");
-                        confirmacaoSenhaCadastro = input.nextLine();
+                        String confirmacao = input.nextLine();
 
 
-                        while (!confirmacaoSenhaCadastro.equals(senhaCadastro)) { //equals vai comparar se são iguais, mas o ! antes, faz comparar se eles são DIFERENTES.
+                        while (!confirmacao.equals(senhaCadastro)) { //equals vai comparar se são iguais, mas o ! antes, faz comparar se eles são DIFERENTES.
                             System.out.println("Senha incorreta. Tente novamente.");
-                            confirmacaoSenhaCadastro = input.nextLine();
+                            confirmacao = input.nextLine();
                         }
 
                         System.out.println("\n----------------------");
@@ -96,18 +90,14 @@ public class Login {
                         System.out.println("----------------------\n");
                         cadastro = true;
                     }
-                    menu();
                     break;
+                case 3:
+                    System.out.println("Ok. Encerrando aplicativo!");
+                    return;
                 default:
                     System.out.println("Por favor, digite uma das opções indicadas.");
                     break;
             }
-            resposta = input.nextInt();
-            input.nextLine();
-        }
-
-        if (resposta == 3) {
-            System.out.println("Encerrando aplicativo.");
         }
     }
 
@@ -118,3 +108,4 @@ public class Login {
         System.out.println("3- Sair");
     }
 }
+
